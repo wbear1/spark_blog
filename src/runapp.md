@@ -53,13 +53,17 @@ a、创建ResultStage： DAGScheduler将Job划分不同的stage，划分的依�
 ![resultStage2](https://github.com/wbear1/spark_blog/blob/master/img/runapp/resultStage2.png)  
 
 这部分代码还是很意思的，一并贴上，有兴趣可看一看。
-![code1](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code1.png)  
-![code2](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code2.png)  
-![code3](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code3.png)  
-![code4](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code4.png)  
-![code5](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code5.png)  
-![code6](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code6.png)  
+![code1](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code1.png)
 
+![code2](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code2.png)  
+
+![code3](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code3.png)  
+
+![code4](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code4.png)  
+
+![code5](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code5.png)  
+
+![code6](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code6.png)  
 
 b、提交Stage，流程如下所示：
 ![stage](https://github.com/wbear1/spark_blog/blob/master/img/runapp/stage.png)
