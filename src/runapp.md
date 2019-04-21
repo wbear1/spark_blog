@@ -43,7 +43,7 @@ driver初始化的过程中，主要包括如下核心组件（非全部）的�
 ![eventLoop](https://github.com/wbear1/spark_blog/blob/master/img/runapp/eventLoop.png)
 
 - 2）DAGScheduler对JobSubmitted事件的处理包括两个步骤：a、创建ResultStage；b、提交stage
-  - a、创建ResultStage： DAGScheduler将Job划分不同的stage，划分的依据就是上面介绍的各个RDD的转化依赖关系，因此stage之间也是有依赖关系，而每个stage由多个可以并行执行的task组成。最后根据stage之间的拓扑排序来提交。简单来说，包括两步：构建stage的DAG，提交stage给TaskScheduler。stage有两种：ResultStage和ShuffleMapStage。ResultStage表示的就是最终rdd执行action的过程，ShuffleMapStage表示的则是最终rdd所依赖的rdd的转化过程，界限是RDD之间的宽依赖。上面的例子构建的stage如下所示：
+a、创建ResultStage： DAGScheduler将Job划分不同的stage，划分的依据就是上面介绍的各个RDD的转化依赖关系，因此stage之间也是有依赖关系，而每个stage由多个可以并行执行的task组成。最后根据stage之间的拓扑排序来提交。简单来说，包括两步：构建stage的DAG，提交stage给TaskScheduler。stage有两种：ResultStage和ShuffleMapStage。ResultStage表示的就是最终rdd执行action的过程，ShuffleMapStage表示的则是最终rdd所依赖的rdd的转化过程，界限是RDD之间的宽依赖。上面的例子构建的stage如下所示：
 ![resultStage](https://github.com/wbear1/spark_blog/blob/master/img/runapp/resultStage.png)  
 
 划分Stage所用算法还是比较巧妙的，使用了DFS和BFS算法。简易流程如下左图如下。下右图举了一个例子，根据stage的划分算法，会生成6个stage，0-4为ShuffleMapStage，5为ResultStage，Stage5的父Stage为Stage1和Stage3。
@@ -59,7 +59,7 @@ driver初始化的过程中，主要包括如下核心组件（非全部）的�
 ![code5](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code5.png)  
 ![code6](https://github.com/wbear1/spark_blog/blob/master/img/runapp/code6.png)  
 
-  - b、提交Stage，流程如下所示：
+b、提交Stage，流程如下所示：
 ![stage](https://github.com/wbear1/spark_blog/blob/master/img/runapp/stage.png)
 
 可以看看从Stage构造出来的TaskSet到底是啥玩意，TaskSet就是Task的集合，每个task对应Stage中一个partition的计算，所以每个Stage对应的并发Task数量和partition数量是相同的。下面代码段是每个task的生成。
